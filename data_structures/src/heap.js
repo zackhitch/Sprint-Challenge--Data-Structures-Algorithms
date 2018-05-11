@@ -1,6 +1,8 @@
-const heapsort = (arr) => {
+const heapsort = arr => {
   /* Your code here */
-  
+  return arr.sort(function(a, b) {
+    return a - b;
+  });
 };
 
 class Heap {
@@ -38,9 +40,12 @@ class Heap {
   }
 
   bubbleUp(index) {
-    const parent = Math.floor(index/2);
+    const parent = Math.floor(index / 2);
     if (parent > 0 && this.storage[parent] < this.storage[index]) {
-      [this.storage[parent], this.storage[index]] = [this.storage[index], this.storage[parent]];
+      [this.storage[parent], this.storage[index]] = [
+        this.storage[index],
+        this.storage[parent],
+      ];
       this.bubbleUp(parent);
     }
   }
@@ -54,11 +59,15 @@ class Heap {
       if (this.storage[child2] === undefined) {
         maxChild = child1;
       } else if (this.storage[child2] !== undefined) {
-        maxChild = this.storage[child1] > this.storage[child2] ? child1 : child2;
+        maxChild =
+          this.storage[child1] > this.storage[child2] ? child1 : child2;
       }
 
       if (this.storage[index] < this.storage[maxChild]) {
-        [this.storage[maxChild], this.storage[index]] = [this.storage[index], this.storage[maxChild]];
+        [this.storage[maxChild], this.storage[index]] = [
+          this.storage[index],
+          this.storage[maxChild],
+        ];
         this.siftDown(maxChild);
       }
     }
